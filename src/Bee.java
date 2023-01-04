@@ -6,11 +6,11 @@ public class Bee implements Runnable{
     Random rand = new Random();
 
     public void goIn() {
-        System.out.println("Pszczoła" + Thread.currentThread().getName() + "wlatuje przez przelot");
+        System.out.println("Pszczoła " + Thread.currentThread().getName() + " wlatuje przez przelot");
         pos = true;
         int timeSpent = rand.nextInt(5000);
         try {
-            Thread.sleep(timeSpent);
+            Thread.sleep(timeSpent+1000);
         }
          catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -18,11 +18,11 @@ public class Bee implements Runnable{
     }
 
     public void goOut() {
-        System.out.println("Pszczoła" + Thread.currentThread().getName() + "wylatuje z przelotu");
+        System.out.println("Pszczoła " + Thread.currentThread().getName() + " wylatuje z przelotu");
         pos = false;
-        int timeSpent = rand.nextInt(5000);
+        int timeSpent = rand.nextInt(5000)+5;
         try {
-            Thread.sleep(timeSpent);
+            Thread.sleep(timeSpent+6000);
         }
         catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -31,6 +31,15 @@ public class Bee implements Runnable{
 
     @Override
     public void run() {
-
+        while(true){
+            if(pos){
+                System.out.println("Pszczoła " + Thread.currentThread().getName() + " podlatuje pod przelot");
+                goOut();
+            }
+            else{
+                System.out.println("Pszczoła " + Thread.currentThread().getName() + " podlatuje pod przelot");
+                goIn();
+            }
+        }
     }
 }

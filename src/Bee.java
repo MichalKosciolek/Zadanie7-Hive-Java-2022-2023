@@ -1,6 +1,4 @@
-import java.util.Iterator;
 import java.util.Random;
-import java.util.concurrent.locks.Condition;
 
 public class Bee implements Runnable{
     boolean pos = true;
@@ -84,17 +82,16 @@ public class Bee implements Runnable{
                     System.out.println("Pszczoła " + Thread.currentThread().getName() + " przelot 2 zajęty, oczekuję przelot 2");
                     try {
                         en.isLocked = true;
+                        en.e2.lock();
                         while(en.isLocked){
                             en.isFree.await();
                         }
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    /*
                     finally {
                         en.e2.unlock();
                     }
-                    */
                 }
             }
         }
